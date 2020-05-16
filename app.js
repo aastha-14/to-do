@@ -45,7 +45,13 @@ function getTasks(){
 }
 function addTask(e){
   if(taskInput.value === ''){
-    alert('Add Something');
+    const errDiv = document.createElement('div');
+    const card = document.querySelector('.card-content');
+    const heading = document.querySelector('.card-title');
+    errDiv.className = 'error';
+    errDiv.appendChild(document.createTextNode('Add Something!'));
+    card.insertBefore(errDiv, heading);
+    setTimeout(()=>{document.querySelector('.error').remove();} ,2000);
   }
   else{
     const li = document.createElement('li');
@@ -57,14 +63,11 @@ function addTask(e){
     li.appendChild(link);
     taskList.appendChild(li);
   }
-
-
-  //create new link createElement
-
-
-
   //store in local storage
-  storeTaskInLocalStorage(taskInput.value);
+  if(taskInput.value){
+    storeTaskInLocalStorage(taskInput.value);
+  }
+
 
   //clear input
   taskInput.value = '';
@@ -86,12 +89,12 @@ function storeTaskInLocalStorage(task){
 
 function removeTask(e) {
   if(e.target.parentElement.classList.contains('delete-item')){
-    if(confirm('Are you sure?')){
+
       e.target.parentElement.parentElement.remove();
 
       //removeTask from localStorage
       removeTaskFromLocalStorage(e.target.parentElement.parentElement);
-    }
+
 
   }
 }

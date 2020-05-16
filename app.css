@@ -1,7 +1,8 @@
-.btn, .btn:hover{
-  background-color: #028ac8;
-}
-
 body{
   color: #028ac8;
+}
+.error{
+  text-align: center;
+  border: 1px solid red;
+  color: red;
 }
